@@ -14,6 +14,7 @@ exports.getPosts = (req, res, next) => {
     .then((count) => {
       totalposts = count;
       return Post.find().populate('creator')
+        .sort({createdAt:-1})
         .skip((currentPage - 1) * postPerPage)
         .limit(postPerPage);
     })
